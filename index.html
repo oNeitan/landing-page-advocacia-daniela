@@ -12,7 +12,7 @@
 <body>
 
   <!-- NAV -->
-  <nav>
+  <nav id="site-nav">
     <div class="nav-logo">Daniela Rosário <span>| Advocacia</span></div>
     <button class="nav-hamburger" aria-label="Menu" onclick="document.querySelector('nav').classList.toggle('nav-open')">
       <span></span><span></span><span></span>
@@ -77,16 +77,22 @@
       <div class="hero-oab">OAB/[UF] 000.000</div>
     </div>
 
-    <!-- RIGHT: advogada photo -->
+    <!-- RIGHT: advogada photo (PNG-style cutout w/ mask + warm backdrop) -->
     <div class="hero-right">
+      <div class="hero-backdrop"></div>
       <div class="hero-photo-wrap">
         <img
-          src="https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=900&q=80"
+          src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80"
           alt="Dra. Daniela Rosário — Advogada Trabalhista"
         />
-
       </div>
     </div>
+
+    <!-- scroll cue -->
+    <a href="#sobre" class="hero-scroll" aria-label="Rolar para a próxima seção">
+      <span class="hero-scroll-label">Conheça meu trabalho</span>
+      <span class="hero-scroll-line"><span></span></span>
+    </a>
   </section>
 
   <!-- SOBRE — light section, balances dark hero (inspired by reference 1) -->
@@ -231,8 +237,8 @@
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
           </svg>
         </div>
-        <h4>Atendimento online<br/>ou presencial</h4>
-        <p>Você pode optar pelo atendimento online ou presencial, com total economia de tempo e transporte. Atendemos todo o Brasil.</p>
+        <h4>Atendimento<br/>100% online</h4>
+        <p>Atendimento totalmente remoto via WhatsApp e videochamada, com economia de tempo e deslocamento. Atendemos todo o Brasil.</p>
       </div>
       <div class="diff-card">
         <div class="diff-icon">
@@ -266,8 +272,10 @@
 
   <!-- DEPOIMENTOS -->
   <section id="depoimentos">
-    <div class="label">Depoimentos</div>
-    <h2 class="section-title">O que dizem meus<br /><strong>clientes</strong></h2>
+    <div class="depo-header">
+      <div class="label">Depoimentos</div>
+      <h2 class="section-title">O que dizem meus<br /><strong>clientes</strong></h2>
+    </div>
     <div class="testimonials-grid">
       <div class="testimonial">
         <span class="quote-mark">"</span>
@@ -318,7 +326,7 @@
       <details class="faq-item">
         <summary>Como funciona o atendimento?<span class="faq-toggle"></span></summary>
         <div class="faq-content">
-          <p>O atendimento pode ser online via WhatsApp, videochamada ou presencial. Após o primeiro contato, agendamos uma conversa para entender sua situação e definir o melhor caminho.</p>
+          <p>O atendimento é totalmente online via WhatsApp e videochamada. Após o primeiro contato, agendamos uma conversa para entender sua situação e definir o melhor caminho.</p>
         </div>
       </details>
       <details class="faq-item">
@@ -355,17 +363,10 @@
         <div class="label">Fale comigo</div>
         <h2 class="section-title">Agende sua<br /><strong>Consulta</strong></h2>
         <p>
-          Tire suas dúvidas ou agende uma consulta. Atendimento presencial e online.
+          Tire suas dúvidas ou agende uma consulta. Atendimento 100% online em todo o Brasil.
           Primeira conversa sem compromisso.
         </p>
 
-        <div class="contact-item">
-          <div class="contact-icon"></div>
-          <div class="contact-item-text">
-            <strong>Endereço</strong>
-            <span>Rua [Endereço], nº 000 — [Cidade/UF]</span>
-          </div>
-        </div>
         <div class="contact-item">
           <div class="contact-icon"></div>
           <div class="contact-item-text">
@@ -444,6 +445,12 @@
   </a>
 
   <script>
+    // Nav: transparent over hero, gains background after scroll
+    const _nav = document.getElementById('site-nav');
+    const _onScroll = () => _nav.classList.toggle('scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', _onScroll, { passive: true });
+    _onScroll();
+
     function handleSubmit(e) {
       e.preventDefault();
       const btn = e.target.querySelector('[type="submit"]');
